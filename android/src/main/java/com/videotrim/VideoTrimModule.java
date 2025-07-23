@@ -214,6 +214,20 @@ public class VideoTrimModule extends ReactContextBaseJavaModule implements Video
       alertDialog = builder.create();
       alertDialog.setView(trimmerView);
       alertDialog.show();
+      if (alertDialog.getWindow() != null) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+          alertDialog.getWindow().setDecorFitsSystemWindows(false);
+        }
+        final View decorView = alertDialog.getWindow().getDecorView();
+        androidx.core.view.ViewCompat.setOnApplyWindowInsetsListener(decorView, (v, windowInsets) -> {
+          androidx.core.graphics.Insets insets = androidx.core.view.WindowInsetsCompat.toWindowInsetsCompat(windowInsets).getInsets(
+            androidx.core.view.WindowInsetsCompat.Type.systemBars() | androidx.core.view.WindowInsetsCompat.Type.displayCutout()
+          );
+          trimmerView.setPadding(insets.left, insets.top, insets.right, insets.bottom);
+          return androidx.core.view.WindowInsetsCompat.CONSUMED;
+        });
+        androidx.core.view.ViewCompat.requestApplyInsets(decorView);
+      }
 
       // this is to ensure to release resource if dialog is dismissed in unexpected way (Eg. open control/notification center by dragging from top of screen)
       alertDialog.setOnDismissListener(dialog -> {
