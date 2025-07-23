@@ -1,6 +1,6 @@
 # React Native Video Trim
 <div align="center">
-<h2>Video trimmer for your React Native app</h2>
+<h2>Video trimmer for your React Native app fork by Sean</h2>
 
 <img src="images/android.gif" width="300" />
 <img src="images/ios.gif" width="300" />
@@ -188,8 +188,8 @@ Main method to show Video Editor UI.
 
 *Params*:
 - `videoPath`: Path to video file, if this is an invalid path, `onError` event will be fired
-- `config` (optional, every sub props of `config` is optional): 
-  
+- `config` (optional, every sub props of `config` is optional):
+
   - `type` (`default = video`): which player to use, `video` or `audio`
   - `outputExt` (`default = mp4`): output file extension
   - `enableHapticFeedback` (`default = true`): whether to enable haptic feedback
